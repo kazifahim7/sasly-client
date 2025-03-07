@@ -10,34 +10,34 @@ import { FaSearch, FaUndo } from "react-icons/fa";
 const ProductPage = () => {
     const [products, setProduct] = useState<ProductType[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState<string>("");  
+    const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
 
-    
+
     useEffect(() => {
-        const url = `http://localhost:5000/api/v1/listing/listings?searchTerm=${searchTerm}` +
-            (selectedCategory ? `&category=${selectedCategory}` : '');  
+        const url = `https://assignment-6-server-ivory.vercel.app/api/v1/listing/listings?searchTerm=${searchTerm}` +
+            (selectedCategory ? `&category=${selectedCategory}` : '');
 
         fetch(url, { cache: "no-store" })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
                 setProduct(data.data);
-                setFilteredProducts(data.data);  
+                setFilteredProducts(data.data);
             });
-    }, [searchTerm, selectedCategory]);  
+    }, [searchTerm, selectedCategory]);
 
     const handleReset = () => {
         setSearchTerm("");
-        setSelectedCategory("");  
-        setFilteredProducts(products);  
+        setSelectedCategory("");
+        setFilteredProducts(products);
     };
 
     const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedCategory(event.target.value);
     };
 
- 
+
 
     return (
         <div>
@@ -84,7 +84,7 @@ const ProductPage = () => {
                         <div className="text-center col-span-full">Data Not Found</div>
                     ) : (
                         filteredProducts.map((product: ProductType) => (
-                          <Card key={product._id} product={product}></Card>
+                            <Card key={product._id} product={product}></Card>
                         ))
                     )}
                 </div>

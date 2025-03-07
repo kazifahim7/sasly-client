@@ -23,7 +23,7 @@ export const middleware = async (request: NextRequest) => {
         } else {
             return NextResponse.redirect(
                 new URL(
-                    `http://localhost:3000/login?redirectPath=${pathname}`,
+                    `https://assignment-6-client-seven.vercel.app/login?redirectPath=${pathname}`,
                     request.url
                 )
             );

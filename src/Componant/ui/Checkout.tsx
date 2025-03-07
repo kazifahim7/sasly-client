@@ -26,6 +26,7 @@ const Checkout = ({item}:{item:ProductType}) => {
         const id= toast.loading("loading.")
         try {
             const result = await buyProduct(data)
+            console.log(result)
 
             if(result.success){
                 toast.success(result.message,{id})

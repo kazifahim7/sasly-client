@@ -5,20 +5,20 @@ import Link from "next/link";
 const Details = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
 
-   
+
     const cookieStore = await cookies();
     const token = cookieStore.get("accessToken")?.value;
 
-   
+
     if (!token) {
         return <h1>Unauthorized</h1>;
     }
 
     // Fetch the listing data from your API
-    const res = await fetch(`http://localhost:5000/api/v1/listing/listings/${id}`, {
+    const res = await fetch(`https://assignment-6-server-ivory.vercel.app/api/v1/listing/listings/${id}`, {
         method: "GET",
         headers: {
-            Authorization: token,  
+            Authorization: token,
         },
     });
     const result = await res.json();

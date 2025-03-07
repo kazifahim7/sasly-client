@@ -6,15 +6,15 @@ import { cookies } from "next/headers"
 import { FieldValues } from "react-hook-form"
 
 
-export const sellProduct = async (data:FieldValues)=>{
+export const sellProduct = async (data: FieldValues) => {
     try {
-        const res = await fetch('http://localhost:5000/api/v1/listing/listings',{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
+        const res = await fetch('https://assignment-6-server-ivory.vercel.app/api/v1/listing/listings', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
                 Authorization: (await cookies()).get("accessToken")!.value
             },
-            body:JSON.stringify(data)
+            body: JSON.stringify(data)
         })
         revalidateTag("myListing")
         const result = await res.json()
@@ -24,37 +24,37 @@ export const sellProduct = async (data:FieldValues)=>{
 
 
 
-        
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error:any) {
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
         throw new Error(error.message);
-        
+
     }
 
 }
 
 
 
-export const myProduct = async()=>{
+export const myProduct = async () => {
     try {
-        const res = await fetch("http://localhost:5000/api/v1/listing/my-listings", {
+        const res = await fetch("https://assignment-6-server-ivory.vercel.app/api/v1/listing/my-listings", {
             method: "GET",
             headers: {
                 Authorization: (await cookies()).get("accessToken")!.value
             },
-            next:{tags:["myListing"]}
+            next: { tags: ["myListing"] }
         })
         const data = await res.json()
 
         return data
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error : any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
         throw new Error(error.message);
     }
 }
-export const deleteProduct = async(id:string)=>{
+export const deleteProduct = async (id: string) => {
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/listing/listing/${id}`, {
+        const res = await fetch(`https://assignment-6-server-ivory.vercel.app/api/v1/listing/listing/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: (await cookies()).get("accessToken")!.value
@@ -64,34 +64,34 @@ export const deleteProduct = async(id:string)=>{
         const data = await res.json()
 
         return data
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error : any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
         throw new Error(error.message);
     }
 }
-export const detailsProduct = async(id:string)=>{
+export const detailsProduct = async (id: string) => {
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/listing/listings/${id}`, {
+        const res = await fetch(`https://assignment-6-server-ivory.vercel.app/api/v1/listing/listings/${id}`, {
             method: "GET",
             headers: {
                 Authorization: (await cookies()).get("accessToken")!.value
             }
         })
-      
+
         const data = await res.json()
 
         return data
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error : any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
         throw new Error(error.message);
     }
 }
-export const updateProduct = async(id:string,payload:Partial<ProductType>)=>{
+export const updateProduct = async (id: string, payload: Partial<ProductType>) => {
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/listing/listing/${id}`, {
+        const res = await fetch(`https://assignment-6-server-ivory.vercel.app/api/v1/listing/listing/${id}`, {
             method: "PUT",
             headers: {
-                "Content-Type":"application/json",
+                "Content-Type": "application/json",
                 Authorization: (await cookies()).get("accessToken")!.value
 
             },
@@ -99,32 +99,32 @@ export const updateProduct = async(id:string,payload:Partial<ProductType>)=>{
 
         })
         revalidateTag("myListing")
-      
+
         const data = await res.json()
 
         return data
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error : any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
         throw new Error(error.message);
     }
 }
-export const singleProduct = async(id:string)=>{
+export const singleProduct = async (id: string) => {
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/listing/listings/${id}`, {
+        const res = await fetch(`https://assignment-6-server-ivory.vercel.app/api/v1/listing/listings/${id}`, {
             method: "GET",
             headers: {
-                "Content-Type":"application/json",
+                "Content-Type": "application/json",
                 Authorization: (await cookies()).get("accessToken")!.value
 
             }
         })
-      
-      
+
+
         const data = await res.json()
 
         return data
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error : any) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
         throw new Error(error.message);
     }
 }

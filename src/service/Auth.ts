@@ -6,27 +6,27 @@ import { cookies } from "next/headers"
 import { FieldValues } from "react-hook-form"
 
 export const registerUser = async (data: FieldValues) => {
-    const res = await fetch('http://localhost:5000/api/v1/auth/register',{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
+    const res = await fetch('https://assignment-6-server-ivory.vercel.app/api/v1/auth/register', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
         },
-        body:JSON.stringify(data)
+        body: JSON.stringify(data)
 
     })
     return await res.json()
 }
 export const logInUser = async (data: FieldValues) => {
-    const res = await fetch('http://localhost:5000/api/v1/auth/login',{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
+    const res = await fetch('https://assignment-6-server-ivory.vercel.app/api/v1/auth/login', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
         },
-        body:JSON.stringify(data)
+        body: JSON.stringify(data)
 
     })
     const result = await res.json()
-    if(result.success){
+    if (result.success) {
         (await cookies()).set("accessToken", result?.data.token)
     }
 
@@ -47,13 +47,13 @@ export const getCurrentUser = async () => {
 }
 
 
-export const logOut=async()=>{
+export const logOut = async () => {
     (await cookies()).delete("accessToken")
 }
 
 
-export const updateProfile = async (id:string,data: FieldValues) => {
-    const res = await fetch(`http://localhost:5000/api/v1/auth/user/${id}`, {
+export const updateProfile = async (id: string, data: FieldValues) => {
+    const res = await fetch(`https://assignment-6-server-ivory.vercel.app/api/v1/auth/user/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

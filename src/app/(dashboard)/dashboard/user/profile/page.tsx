@@ -2,13 +2,13 @@ import UpdateProfile from '@/Componant/userTable/UpdateProfile';
 import { cookies } from 'next/headers';
 import React from 'react';
 
-const ProfilePage = async() => {
-    const res = await fetch('http://localhost:5000/api/v1/auth/user',{
-        method:"GET",
-        headers:{
+const ProfilePage = async () => {
+    const res = await fetch('https://assignment-6-server-ivory.vercel.app/api/v1/auth/user', {
+        method: "GET",
+        headers: {
             Authorization: (await cookies()).get("accessToken")!.value
         },
-        next:{tags:["profile"]}
+        next: { tags: ["profile"] }
 
     })
     const data = await res.json()
