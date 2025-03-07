@@ -1,19 +1,25 @@
 "use client"
 import { useUser } from "@/context/userContext";
+import { selectAllProducts } from "@/redux/Feature/productSlice";
+import { useAppSelector } from "@/redux/hook";
 import { logOut } from "@/service/Auth";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
 import { FaRegHeart } from "react-icons/fa6";
 import { toast } from "sonner";
 
 
 const Navbar = () => {
     const pathname = usePathname()
+    const router =useRouter()
     const {user,setIsLoading,setReload} = useUser()
+    const favProduct = useAppSelector(selectAllProducts)
     
     const handleLogOut= ()=>{
         logOut()
+        router.push('/')
         setIsLoading(true)
         setReload(true)
         toast.success("log out successful")
@@ -35,27 +41,28 @@ const Navbar = () => {
                     <Link href={"/product"} className={`${pathname === '/product' && "text-orange-400"} font-bold text-xl`}> Product</Link>
                 </div>
             </div>
-            <div className="flex-none">
-                {user?.role ? <div>
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                            <div className="indicator ">
-                                <FaRegHeart className="text-2xl" />
-                                <span className="badge badge-sm indicator-item">8</span>
-                            </div>
+            <div className="flex gap-1">
+
+                <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                        <div className="indicator ">
+                            <FaRegHeart className="text-2xl" />
+                            <span className="badge badge-sm indicator-item">{favProduct.length}</span>
                         </div>
-                        <div
-                            tabIndex={0}
-                            className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
-                            <div className="card-body">
-                                <span className="text-lg font-bold">8 Items</span>
-                                <span className="text-info">Subtotal: $999</span>
-                                <div className="card-actions">
-                                    <button className="btn btn-primary btn-block">View cart</button>
-                                </div>
+                    </div>
+                    <div
+                        tabIndex={0}
+                        className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow">
+                        <div className="card-body">
+                            <span className="text-lg font-bold"> {favProduct.length} Items</span>
+                            <div className="card-actions">
+                                <Link href={'/cart'} className="btn bg-orange-500 btn-block">View cart</Link>
                             </div>
                         </div>
                     </div>
+                </div>
+                {user?.role ? <div>
+                    
                     <div className="dropdown dropdown-end ml-2">
 
 

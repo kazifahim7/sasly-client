@@ -1,36 +1,41 @@
 import { ProductType } from "@/types/product";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-interface Product {
-    product: ProductType[]
+
+interface ProductState {
+    product: ProductType[]; 
 }
 
-const initialState: Product = {
-    product: []
+// Initial state
+const initialState: ProductState = {
+    product: [],
+};
 
-}
-
-
+// Create slice
 export const productSlice = createSlice({
     name: "product",
     initialState,
     reducers: {
-        addProduct: (state, action) => {
-            state.product = action.payload
+      
+        addProduct: (state, action: PayloadAction<ProductType>) => {
+          
+            const isAlreadyExists = state.product.some(item => item._id === action.payload._id);
+            if (!isAlreadyExists) {
+                state.product = [...state.product, action.payload]; 
+            }
         },
-        deleteProduct: (state, action) => {
-            state.product = state.product.filter((item) => item._id !== action.payload)
-        }
-    }
-})
 
-//! all product
-export const allProduct = (state: RootState) => state.product.product;
+        // Remove product by ID
+        deleteProduct: (state, action: PayloadAction<string>) => {
+            state.product = state.product.filter(item => item._id !== action.payload);
+        },
+    },
+});
 
+// Selector to get all products
+export const selectAllProducts = (state: RootState) => state.product.product;
 
-export const { addProduct, deleteProduct } = productSlice.actions
-
-
-
-export default productSlice.reducer
+// Export actions and reducer
+export const { addProduct, deleteProduct } = productSlice.actions;
+export default productSlice.reducer;

@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { logInUser } from "@/service/Auth";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import {  useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/userContext";
 
 const SignIn = () => {
@@ -26,7 +26,13 @@ const SignIn = () => {
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
+
     };
+
+    const params=useSearchParams()
+    const redireact = params.get("redirectPath")
+    
+  
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         console.log(data)
@@ -40,8 +46,13 @@ const SignIn = () => {
                 toast.success(result.message, { id })
                 setIsLoading(true)
                 setReload(true)
+                if(redireact){
+                    navigate.push(redireact)
+                }else{
+                    navigate.push('/')
+                }
             
-                navigate.push('/')
+                
             } else {
                 toast.error(result.message, { id })
             }

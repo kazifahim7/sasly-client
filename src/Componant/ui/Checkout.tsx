@@ -49,7 +49,7 @@ const Checkout = ({item}:{item:ProductType}) => {
 
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
                 {/* Product Image */}
-                <Image height={500} width={500} src={item.images} alt={item.title} className="w-full h-64 object-cover rounded-lg" />
+                <Image height={500} width={500} src={item.images || ''} alt={item.title || ''} className="w-full  object-cover rounded-lg" />
 
                 {/* Product Details */}
                 <h2 className="text-xl font-semibold mt-4">{item.title}</h2>

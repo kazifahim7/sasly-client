@@ -14,7 +14,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
    
     return (
         <div>
-            <Checkout item={result?.data}></Checkout>
+            <Checkout item={result?.data || {} }></Checkout>
         </div>
     );
 };

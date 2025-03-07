@@ -1,8 +1,8 @@
 "use client"
 
+import Card from "@/Componant/reuseable/Card";
 import { ProductType } from "@/types/product";
-import Image from "next/image";
-import Link from "next/link";
+
 import { useEffect, useState } from "react";
 
 import { FaSearch, FaUndo } from "react-icons/fa";
@@ -84,29 +84,7 @@ const ProductPage = () => {
                         <div className="text-center col-span-full">Data Not Found</div>
                     ) : (
                         filteredProducts.map((product: ProductType) => (
-                            <div key={product._id} className="card bg-base-100 m-4 shadow-sm ">
-                                <figure>
-                                    <Image
-                                        height={400}
-                                        width={400}
-                                        src={product.images}
-                                        alt="Product Image"
-                                        className="h-[300px]"
-                                    />
-                                </figure>
-                                <div className="card-body">
-                                    <h2 className="card-title">
-                                        {product.title}
-                                        <div className="badge badge-secondary w-1/2 text-xs">{product.condition}</div>
-                                    </h2>
-                                    <p>{product.description.slice(0, 60)}...</p>
-                                    <p>Price: {product.price} TK</p>
-                                    <div className="card-actions justify-end">
-                                        <div className="badge badge-outline cursor-pointer">Save</div>
-                                        <Link href={`/product/${product._id}`} className="badge badge-outline cursor-pointer">Details</Link>
-                                    </div>
-                                </div>
-                            </div>
+                          <Card key={product._id} product={product}></Card>
                         ))
                     )}
                 </div>
