@@ -3,6 +3,7 @@ import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import UserProvider from "@/context/userContext";
+import StoreProvider from "@/provider/storeprovider";
 
 
 const geistMono = Geist_Mono({
@@ -25,9 +26,11 @@ export default function RootLayout({
       <body
         className={`${geistMono.className} antialiased`}
       >
-        <UserProvider>
-          {children}
-        </UserProvider>
+        <StoreProvider>
+          <UserProvider>
+            {children}
+          </UserProvider>
+        </StoreProvider>
 
         <Toaster richColors position="top-center" ></Toaster>
       </body>
