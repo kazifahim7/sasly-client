@@ -30,7 +30,9 @@ const SignIn = () => {
     };
 
     const params=useSearchParams()
-    const redireact = params.get("redirectPath")
+    console.log(params)
+    const rediract =params.get("redirectPath") || "/"
+    console.log(rediract)
     
   
 
@@ -46,11 +48,11 @@ const SignIn = () => {
                 toast.success(result.message, { id })
                 setIsLoading(true)
                 setReload(true)
-                if(redireact){
-                    navigate.push(redireact)
-                }else{
-                    navigate.push('/')
+                if (rediract){
+                    navigate.push(rediract)
                 }
+                    navigate.push('/')
+              
             
                 
             } else {

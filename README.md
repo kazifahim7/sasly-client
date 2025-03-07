@@ -10,7 +10,7 @@ You can explore the live version of the project here:
 ## Roles
 
 - **User (Single Role)**: A unified role where users can both buy and sell items.
-- **Admin (Optional)**: Can manage users and listings.
+- **Admin **: Can manage users and listings.
 
 ## Key Features
 
